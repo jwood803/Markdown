@@ -21,7 +21,7 @@ To help understand a bit more of the F# process I ported the Phoneword applicati
 For the most part I followed Larry O'Brien's example from above and included all of the Xamarin Forms code inside of the iOS project. However, I did separate out the Xamarin Forms stuff from the `AppDelegate` file.
 
 Here is the full Xamarin Forms code in F#.
-```
+```fsharp
 open Xamarin.Forms
 open UIKit
 open Foundation
