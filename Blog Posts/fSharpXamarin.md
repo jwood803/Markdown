@@ -73,7 +73,7 @@ type App() =
 
 As you can see, we can use the Xamarin Forms APIs just like we would use them in C#.
 
-And in our `AppDelegate` we can do the same as if we were in a C# project.
+And in our `AppDelegate` for iOS we can do the same as if we were in a C# project.
 
 ```fsharp
 [<Register("AppDelegate")>]
@@ -98,9 +98,18 @@ All that we added here is to initialize Xamarin Forms and set the `Window.RootVi
 As you can tell this is only for iOS, but the same can be done for an Android project.
 
 #### Adding an F# PCL
-Unfortunately, one of the things Xamarin Studio isn't able to do yet (though it's definitely being worked on and will be out fairly soon) is the ability to add an F# Portable Class Library to the project. To do this you'll have to open the solution up in Visual Studio and add it through there.
+Unfortunately, one of the things Xamarin Studio isn't able to do yet (again, it's definitely being worked on and will be out fairly soon) is the ability to add an F# Portable Class Library to the project. To do this you'll have to open the solution up in Visual Studio and add it through there.
 
 ![F# PCL in Visual Studio](https://dl.dropboxusercontent.com/s/91wpconrqy7oh83/FSharpPCL.jpg?dl=0)
 
+
 ---
-This gives a brief introduction to using F# with Xamarin to make mobile applications. 
+This gives a brief introduction to using F# with Xamarin to make mobile applications, and this will only get easier in the future.
+
+The full code can be found on [GitHub]()
+
+---
+
+![Xamarin Partner](http://www.wintellect.com/devcenter/wp-content/uploads/2015/05/xamarin-partner_thumb1.png)
+
+[Build your next mobile application with Wintellect and Xamarin!](http://www.wintellect.com/certified-xamarin-mobile-consultants)
