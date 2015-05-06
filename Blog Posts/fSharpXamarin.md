@@ -71,6 +71,30 @@ type App() =
        contentPage
 ```
 
+As you can see, we can use the Xamarin Forms APIs just like we would use them in C#.
+
+And in our `AppDelegate` we can do the same as if we were in a C# project.
+
+```fsharp
+[<Register("AppDelegate")>]
+type AppDelegate() = 
+    inherit UIApplicationDelegate()
+
+    member val Window = null with get, set
+
+    // This method is invoked when the application is ready to run.
+    override this.FinishedLaunching(app, options) = 
+        this.Window <- new UIWindow(UIScreen.MainScreen.Bounds)
+
+        Xamarin.Forms.Forms.Init()
+
+        this.Window.RootViewController <- App.GetMainPage.CreateViewController()
+        this.Window.MakeKeyAndVisible()
+        true
+```
+
+All we add here is to initialize Xamarin Forms and set the `Window.RootViewController` to the `App.GetMainPage.CreateViewController()`.
+
 #### Adding an F# PCL
 Unfortunately, one of the things Xamarin Studio isn't able to do yet (though it's definitely being worked on and will be out fairly soon) is the ability to add an F# Portable Class Library to the project. To do this you'll have to open the solution up in Visual Studio and add it through there.
 
