@@ -93,10 +93,14 @@ type AppDelegate() =
         true
 ```
 
-All we add here is to initialize Xamarin Forms and set the `Window.RootViewController` to the `App.GetMainPage.CreateViewController()`.
+All that we added here is to initialize Xamarin Forms and set the `Window.RootViewController` to the `App.GetMainPage.CreateViewController()`.
+
+As you can tell this is only for iOS, but the same can be done for an Android project.
 
 #### Adding an F# PCL
 Unfortunately, one of the things Xamarin Studio isn't able to do yet (though it's definitely being worked on and will be out fairly soon) is the ability to add an F# Portable Class Library to the project. To do this you'll have to open the solution up in Visual Studio and add it through there.
 
 ![F# PCL in Visual Studio](https://dl.dropboxusercontent.com/s/91wpconrqy7oh83/FSharpPCL.jpg?dl=0)
 
+---
+This gives a brief introduction to using F# with Xamarin to make mobile applications. 
