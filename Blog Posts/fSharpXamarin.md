@@ -8,7 +8,7 @@ Currently in Xamarin (at the time of this writing - version 5.9) there aren't an
 
 ![Available F# Projects](https://dl.dropboxusercontent.com/s/mxdnb6gfnxbhbs0/FSharp-Solution.jpg?dl=0)
 
-#### Using Xamarin Forms
+### Using Xamarin Forms
 Larry O'Brien already has a fantastic [tutorial](http://www.knowing.net/index.php/2014/08/27/xamarin-forms-programming-in-f/) on how to use Xamarin Forms in an F# iOS or Android project. Though, I did notice that I didn't have to bring in the `FSharp.Core Mono delay signed` NuGet package as F# is already included with Xamarin Studio. I just needed to bring in `Xamarin.Forms` from NuGet and add the following references from the Mono library as the post also describes:
 
  - System.ObjectModel.dll
@@ -73,6 +73,7 @@ type App() =
 
 As you can see, we can use the Xamarin Forms APIs just like we would use them in C#.
 
+#### iOS
 And in our `AppDelegate` for iOS we can do the same as if we were in a C# project.
 
 ```fsharp
@@ -95,9 +96,10 @@ type AppDelegate() =
 
 All that we added here is to initialize Xamarin Forms and set the `Window.RootViewController` to the `App.GetMainPage.CreateViewController()`.
 
-As you can tell this is only for iOS, but the same can be done for an Android project.
+#### Android
+Simiar to iOS
 
-#### Adding an F# PCL
+### Adding an F# PCL
 Unfortunately, one of the things Xamarin Studio isn't able to do yet (again, it's definitely being worked on and will be out fairly soon) is the ability to add an F# Portable Class Library to the project. To do this you'll have to open the solution up in Visual Studio and add it through there.
 
 ![F# PCL in Visual Studio](https://dl.dropboxusercontent.com/s/91wpconrqy7oh83/FSharpPCL.jpg?dl=0)
