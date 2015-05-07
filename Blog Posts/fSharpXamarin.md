@@ -97,7 +97,29 @@ type AppDelegate() =
 All that we added here is to initialize Xamarin Forms and set the `Window.RootViewController` to the `App.GetMainPage.CreateViewController()`.
 
 #### Android
-Simiar to iOS
+Similar to iOS, we just have our `MainActivity` like we would in C#.
+
+```fsharp
+[<Activity (Label = "PhoneWordFSharp.Droid", MainLauncher = true)>]
+type MainActivity () =
+    inherit Activity ()
+
+    let mutable count:int = 1
+
+    override this.OnCreate (bundle) =
+
+        base.OnCreate (bundle)
+
+        // Set our view from the "main" layout resource
+        this.SetContentView (Resource_Layout.Main)
+
+        // Get our button from the layout resource, and attach an event to it
+        let button = this.FindViewById<Button>(Resource_Id.MyButton)
+        button.Click.Add (fun args -> 
+            button.Text <- sprintf "%d clicks!" count
+            count <- count + 1
+        )
+```
 
 ### Adding an F# PCL
 Unfortunately, one of the things Xamarin Studio isn't able to do yet (again, it's definitely being worked on and will be out fairly soon) is the ability to add an F# Portable Class Library to the project. To do this you'll have to open the solution up in Visual Studio and add it through there.
