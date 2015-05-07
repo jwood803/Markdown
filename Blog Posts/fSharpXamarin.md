@@ -18,7 +18,12 @@ After you have all that, you're ready to roll with Xamarin Forms in F#.
 
 To help understand a bit more of the F# process I ported the Phoneword application that we work with quite a bit in [Xamarin University](https://xamarin.com/university) to F# with this. The results are the same if it was a C# project. This fairly simple app takes in a phone number and, if the number includes any letters, it translates the letters into the appropriate numbers and allows you to call that number.
 
-For the most part I followed Larry O'Brien's example from above and included all of the Xamarin Forms code inside of the iOS project. However, I did separate out the Xamarin Forms stuff from the `AppDelegate` file.
+### Adding an F# PCL
+Unfortunately, one of the things Xamarin Studio isn't able to do yet (again, it's definitely being worked on and will be out fairly soon) is the ability to add an F# Portable Class Library to the project. To do this you'll have to open the solution up in Visual Studio and add it through there.
+
+![F# PCL in Visual Studio](https://dl.dropboxusercontent.com/s/91wpconrqy7oh83/FSharpPCL.jpg?dl=0)
+
+For the most part I followed Larry O'Brien's example from above. However, I did separate out the Xamarin Forms stuff from the `AppDelegate` file.
 
 Here is the full Xamarin Forms code in F#.
 ```fsharp
@@ -107,7 +112,6 @@ type MainActivity () =
     let mutable count:int = 1
 
     override this.OnCreate (bundle) =
-
         base.OnCreate (bundle)
 
         // Set our view from the "main" layout resource
@@ -120,12 +124,6 @@ type MainActivity () =
             count <- count + 1
         )
 ```
-
-### Adding an F# PCL
-Unfortunately, one of the things Xamarin Studio isn't able to do yet (again, it's definitely being worked on and will be out fairly soon) is the ability to add an F# Portable Class Library to the project. To do this you'll have to open the solution up in Visual Studio and add it through there.
-
-![F# PCL in Visual Studio](https://dl.dropboxusercontent.com/s/91wpconrqy7oh83/FSharpPCL.jpg?dl=0)
-
 
 ---
 This gives a brief introduction to using F# with Xamarin to make mobile applications, and this will only get easier in the future.
