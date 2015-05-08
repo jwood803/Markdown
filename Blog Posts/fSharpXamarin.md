@@ -84,15 +84,24 @@ dialer.OpenUrl phoneNumberText.Text |> ignore
 
 > Note that we pipe into the built-in F# function `ignore` since we don't need to do anything with the return type of `dialer.OpenUrl` at this point.
 
-As you can see, we can use the Xamarin Forms APIs just like we would use them in C#.
+We also have to actually add our `App` that our `MainPage` will be set to. Surprisingly, this is very simple and concise.
+
+```fsharp
+type App() =
+    inherit Application(MainPage = MainPage.GetMainPage)
+```
+
+As you can see, we can use Xamarin Forms just like we would use them in C#.
 
 #### iOS
 And in our `AppDelegate` for iOS we can do the same as if we were in a C# project.
 
 ```fsharp
+[<assembly: Dependency(typeof<OpenUrlService>)>] do ()
+
 [<Register("AppDelegate")>]
 type AppDelegate() = 
-    inherit UIApplicationDelegate()
+    inherit FormsApplicationDelegate()
 
     member val Window = null with get, set
 
@@ -102,35 +111,28 @@ type AppDelegate() =
 
         Xamarin.Forms.Forms.Init()
 
-        this.Window.RootViewController <- App.GetMainPage.CreateViewController()
-        this.Window.MakeKeyAndVisible()
+        this.LoadApplication(App())
         true
 ```
 
-All that we added here is to initialize Xamarin Forms and set the `Window.RootViewController` to the `App.GetMainPage.CreateViewController()`.
+All we needed to include here is to set our dependency to let Xamarin Forms know where the platform specific code is, initialize Xamarin Forms, and tell it what application to load.
 
 #### Android
-Similar to iOS, we just have our `MainActivity` like we would in C#.
+Similar to iOS, we just have our `MainActivity` like we would in C# and we basically add the same from iOS.
 
 ```fsharp
+[<assembly: Dependency(typeof<OpenUrlService>)>] do ()
+
 [<Activity (Label = "PhoneWordFSharp.Droid", MainLauncher = true)>]
 type MainActivity () =
-    inherit Activity ()
-
-    let mutable count:int = 1
+    inherit FormsApplicationActivity ()
 
     override this.OnCreate (bundle) =
         base.OnCreate (bundle)
 
-        // Set our view from the "main" layout resource
-        this.SetContentView (Resource_Layout.Main)
+        Forms.Init(this, bundle)
 
-        // Get our button from the layout resource, and attach an event to it
-        let button = this.FindViewById<Button>(Resource_Id.MyButton)
-        button.Click.Add (fun args -> 
-            button.Text <- sprintf "%d clicks!" count
-            count <- count + 1
-        )
+        this.LoadApplication(App())
 ```
 
 ---
