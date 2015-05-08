@@ -1,8 +1,8 @@
-While we certainly have been busy getting our [hands dirty](http://www.wintellect.com/devcenter/tag/xamarin) with Xamarin I've been doing some of my own. However, I've been messing around with using Xamarin with F#.
+While we certainly have been busy getting our [hands dirty](http://www.wintellect.com/devcenter/tag/xamarin) with Xamarin I've been doing some of my own. However, I've been messing around with using Xamarin with F#. I mentioned in a previous post that F# can be used very well for [enterprise applications](http://www.wintellect.com/devcenter/jwood/using-f-for-enterprise-applications). Here's an in depth look at F# with Xamarin for mobile applications.
 
-I mentioned that F# can be used very well for [enterprise applications](http://www.wintellect.com/devcenter/jwood/using-f-for-enterprise-applications). Here's an in depth look at F# with Xamarin for mobile applications.
+But why F# with Xamarin, you ask? Well, it just turns out that I love working with both of these technologies and I got lucky that the awesome folks at Xamarin and [Dave Thomas](http://7sharpnine.com/) - who does most of the great work with F# for Xamarin -  decided to take on F# as a [first class language](http://developer.xamarin.com/guides/cross-platform/fsharp/).
 
-But why F# with Xamarin, you ask? Well, it just turns out that I love working with both of these technologies and I got lucky that the awesome folks at Xamarin and [Dave Thomas](http://7sharpnine.com/) - who does the great work with F# for Xamarin -  decided to take on F# as a [first class language](http://developer.xamarin.com/guides/cross-platform/fsharp/).
+> Before we get started, it's helpful to remember that, in F#, if you reference any other part of your code, whether it's in the same file or not, the part you are referencing needs to be defined *before* you reference it. 
 
 Currently in Xamarin (at the time of this writing - version 5.9) there aren't any actual Xamarin Forms or PCL templates. Though, it is rumored there will be more templates in 6.0.
 
@@ -16,7 +16,7 @@ Larry O'Brien already has a fantastic [tutorial](http://www.knowing.net/index.ph
 
 After you have all that, you're ready to roll with Xamarin Forms in F#. 
 
-To help understand a bit more of the F# process I ported the Phoneword application that we work with quite a bit in [Xamarin University](https://xamarin.com/university) to F# with this. The results are the same if it was a C# project. This fairly simple app takes in a phone number and, if the number includes any letters, it translates the letters into the appropriate numbers and allows you to call that number.
+To help understand a bit more of combining F# with Xamarin I ported the Phoneword application that we work with quite a bit in [Xamarin University](https://xamarin.com/university) to F#. The results are the same if it was a C# project. This fairly simple app takes in a phone number and, if the number includes any letters, it translates the letters into the appropriate numbers and allows you to call that number.
 
 ### Adding an F# PCL
 Unfortunately, one of the things Xamarin Studio isn't able to do yet (again, it's definitely being worked on and will be out fairly soon) is the ability to add an F# Portable Class Library to the project. To do this you'll have to open the solution up in Visual Studio and add it through there.
@@ -76,6 +76,8 @@ type MainPage() =
 ```
 
 The `type IOpenUrlService` there is to create our interface so we can use shared code in our Xamarin Forms page and implement it separately in each platform specific project. You may notice we call this lower down and use Xamarin Forms dependency service locator.
+
+Also the `string -> bool` statement there simply states that the `OpenUrl` method takes in a `string` parameter and the return type is `bool`. Very similar to C#'s `Func` type where the last type in the signature represents the return type.
 
 ```fsharp
 DependencyService.Get<IOpenUrlService>()
