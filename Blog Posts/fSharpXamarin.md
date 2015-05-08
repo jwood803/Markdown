@@ -73,6 +73,9 @@ type MainPage() =
        contentPage.Content <- panel
 
        contentPage
+
+type App() =
+    inherit Application(MainPage = MainPage.GetMainPage)
 ```
 
 The `type IOpenUrlService` there is to create our interface so we can use shared code in our Xamarin Forms page and implement it separately in each platform specific project. You may notice we call this lower down and use Xamarin Forms dependency service locator.
@@ -86,7 +89,7 @@ dialer.OpenUrl phoneNumberText.Text |> ignore
 
 > Note that we pipe into the built-in F# function `ignore` since we don't need to do anything with the return type of `dialer.OpenUrl` at this point.
 
-We also have to actually add our `App` that our `MainPage` will be set to. Surprisingly, this is very simple and concise.
+We also have to actually add our `App` that our `MainPage` will be set to. Surprisingly, this is very simple and concise. So much so that, you may have noticed, that it was just added to the end of our file that contains the `MainPage`.
 
 ```fsharp
 type App() =
