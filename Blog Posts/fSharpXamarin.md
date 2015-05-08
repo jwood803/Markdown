@@ -23,6 +23,8 @@ Unfortunately, one of the things Xamarin Studio isn't able to do yet (again, it'
 
 ![F# PCL in Visual Studio](https://dl.dropboxusercontent.com/s/91wpconrqy7oh83/FSharpPCL.jpg?dl=0)
 
+>At this time, there seems to be an issue of opening this in Xamarin Studio (currently already being fixed), so I'll continue using Visual Studio here.
+
 For the most part I followed Larry O'Brien's example from above. However, I did separate out the Xamarin Forms stuff from the `AppDelegate` file into the PCL project.
 
 Here is the full Xamarin Forms code in F#.
@@ -120,6 +122,14 @@ type AppDelegate() =
         true
 ```
 
+With our iOS implementation of `OpenUrlService`.
+
+```fsharp
+type OpenUrlService() =
+    interface IOpenUrlService with
+        member this.OpenUrl url = UIApplication.SharedApplication.OpenUrl(new NSUrl("tel:" + url))
+```
+
 All we needed to include here is to set our dependency to let Xamarin Forms know where the platform specific code is, initialize Xamarin Forms, and tell it what application to load.
 
 #### Android
@@ -138,6 +148,29 @@ type MainActivity () =
         Forms.Init(this, bundle)
 
         this.LoadApplication(App())
+```
+
+With our Android implementation of `OpenUrlService`.
+
+```fsharp
+type OpenUrlService() =
+    let isIntentAvailable (context:Context) (intent:Intent) = 
+        let packageManager = context.PackageManager
+        let list = packageManager.QueryIntentServices(intent, PM.PackageInfoFlags.Services).Union(packageManager.QueryIntentActivities(intent, PM.PackageInfoFlags.Activities))
+
+        if list.Any() then true
+        else false
+
+    interface IOpenUrlService with
+        member this.OpenUrl url = 
+            let context = Forms.Context
+            let intent = new Intent(Intent.ActionCall)
+            
+            match context = null with
+            | true -> ()
+            | false -> intent.SetData(Uri.Parse("tel:" + url)) |> ignore
+
+            isIntentAvailable context intent
 ```
 
 ---
