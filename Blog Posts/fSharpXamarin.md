@@ -23,16 +23,14 @@ Unfortunately, one of the things Xamarin Studio isn't able to do yet (again, it'
 
 ![F# PCL in Visual Studio](https://dl.dropboxusercontent.com/s/91wpconrqy7oh83/FSharpPCL.jpg?dl=0)
 
-For the most part I followed Larry O'Brien's example from above. However, I did separate out the Xamarin Forms stuff from the `AppDelegate` file.
+For the most part I followed Larry O'Brien's example from above. However, I did separate out the Xamarin Forms stuff from the `AppDelegate` file into the PCL project.
 
 Here is the full Xamarin Forms code in F#.
 ```fsharp
-open Xamarin.Forms
-open UIKit
-open Foundation
-open PhoneWordFSharp.Core
+type IOpenUrlService =
+    abstract member OpenUrl: string -> bool 
 
-type App() =
+type MainPage() =
     static member GetMainPage =
        let contentPage = new ContentPage()
        let panel = new StackLayout()
@@ -62,7 +60,8 @@ type App() =
            let isCalling = contentPage.DisplayAlert("Dial a number", "Would you like to call " + phoneNumberText.Text, "Yes", "No")
 
            match isCalling.Result with
-            | true -> UIApplication.SharedApplication.OpenUrl(new NSUrl("tel:" + phoneNumberText.Text)) |> ignore
+            | true -> let dialer = DependencyService.Get<IOpenUrlService>()
+                      dialer.OpenUrl phoneNumberText.Text |> ignore
             | false -> ()
        )
 
@@ -75,6 +74,15 @@ type App() =
 
        contentPage
 ```
+
+The `type IOpenUrlService` there is to create our interface so we can use shared code in our Xamarin Forms page and implement it separately in each platform specific project. You may notice we call this lower down and use Xamarin Forms dependency service locator.
+
+```fsharp
+DependencyService.Get<IOpenUrlService>()
+dialer.OpenUrl phoneNumberText.Text |> ignore
+```
+
+> Note that we pipe into the built-in F# function `ignore` since we don't need to do anything with the return type of `dialer.OpenUrl` at this point.
 
 As you can see, we can use the Xamarin Forms APIs just like we would use them in C#.
 
