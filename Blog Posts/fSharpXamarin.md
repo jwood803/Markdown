@@ -53,12 +53,12 @@ type MainPage() =
        callButton.Text <- "Call"
        callButton.IsEnabled <- false
 
-       translateButton.Clicked.Add(fun i -> 
+       translateButton.Clicked.Add(fun _ -> 
             callButton.Text <- transator.toNumber phoneNumberText.Text
             callButton.IsEnabled <- true
         )
 
-       callButton.Clicked.Add(fun i ->
+       callButton.Clicked.Add(fun _ ->
            let isCalling = contentPage.DisplayAlert("Dial a number", "Would you like to call " + phoneNumberText.Text, "Yes", "No")
 
            match isCalling.Result with
