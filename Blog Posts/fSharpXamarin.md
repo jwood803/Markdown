@@ -2,7 +2,7 @@ While we certainly have been busy getting our [hands dirty](http://www.wintellec
 
 But why F# with Xamarin, you ask? Well, it just turns out that I love working with both of these technologies and I got lucky that the awesome folks at Xamarin and [Dave Thomas](http://7sharpnine.com/) - who does most of the great work with F# for Xamarin -  decided to take on F# as a [first class language](http://developer.xamarin.com/guides/cross-platform/fsharp/).
 
-> Before we get started, it's helpful to remember that, in F#, if you reference any other part of your code, whether it's in the same file or not, the part you are referencing needs to be defined *before* you reference it. 
+> Before we get started, it's helpful to remember that, in F#, if you reference any other part of your code, whether it's in the same file or not, the part you are referencing needs to be defined *before* you reference it. More info can be found at the wonderful [F# for Fun and Profit](http://fsharpforfunandprofit.com/posts/cyclic-dependencies/) site.
 
 Currently in Xamarin (at the time of this writing - version 5.9) there aren't any actual Xamarin Forms or PCL templates. Though, it is rumored there will be more templates in 6.0.
 
