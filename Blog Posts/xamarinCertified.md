@@ -1,0 +1,1 @@
+Just over 6 months ago, I honestly didn't even know what Xamarin was or what they did. I've heard of the Mono project, of course, but that's only with the very brief "It can run on Mac and Linux" thing.
