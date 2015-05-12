@@ -176,10 +176,10 @@ type OpenUrlService() =
 ---
 This gives a brief introduction to using F# with Xamarin to make mobile applications, and this will only get easier in the future.
 
-The full code can be found on [GitHub]()
+The full code can be found on [GitHub](https://github.com/Wintellect/XamarinSamples/tree/master/PhoneWordFSharp)
 
 ---
+[![Xamarin Partner][2]][1]
 
-![Xamarin Partner](http://www.wintellect.com/devcenter/wp-content/uploads/2015/05/xamarin-partner_thumb1.png)
-
-[Build your next mobile application with Wintellect and Xamarin!](http://www.wintellect.com/certified-xamarin-mobile-consultants)
+  [1]: http://www.wintellect.com/certified-xamarin-mobile-consultants
+  [2]: http://www.wintellect.com/devcenter/wp-content/uploads/2015/05/xamarin-partner_thumb1.png (Xamarin Partner)
