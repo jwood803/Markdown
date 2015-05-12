@@ -23,7 +23,7 @@ Unfortunately, one of the things Xamarin Studio isn't able to do yet (again, it'
 
 ![F# PCL in Visual Studio](https://dl.dropboxusercontent.com/s/91wpconrqy7oh83/FSharpPCL.jpg?dl=0)
 
->At this time, there seems to be an issue of opening this in Xamarin Studio (currently already being fixed), so I'll continue using Visual Studio here.
+>At this time, there seems to be an issue of opening this in Xamarin Studio (currently already being fixed), so I'll continue using Visual Studio throughout the rest of this post.
 
 For the most part I followed Larry O'Brien's example from above. However, I did separate out the Xamarin Forms stuff from the `AppDelegate` file into the PCL project.
 
