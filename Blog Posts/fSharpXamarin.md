@@ -174,7 +174,7 @@ type OpenUrlService() =
 ```
 
 ---
-This gives a brief introduction to using F# with Xamarin to make mobile applications, and this will only get easier in the future.
+This gives a brief introduction to using F# with Xamarin to make mobile applications. This will only get easier in the future so look out for updates to Xamarin Studio for all the good stuff.
 
 The full code can be found on [GitHub](https://github.com/Wintellect/XamarinSamples/tree/master/PhoneWordFSharp)
 
