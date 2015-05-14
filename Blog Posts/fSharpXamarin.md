@@ -25,7 +25,7 @@ Unfortunately, one of the things Xamarin Studio isn't able to do yet (again, it'
 
 >At this time, there seems to be an issue of opening this in Xamarin Studio (currently already being fixed), so I'll continue using Visual Studio throughout the rest of this post.
 
-For the most part I followed Larry O'Brien's example from above. However, I did separate out the Xamarin Forms stuff from the `AppDelegate` file into the PCL project. With the very generous help from Dave Thomas, we were able to get a running sample all in F# and Xamarin Forms.
+For the most part I followed Larry O'Brien's example from above. However, I did separate out the Xamarin Forms stuff from the `AppDelegate` file into the PCL project. With the very generous help from [Dave Thomas](http://7sharpnine.com/), we were able to get a running sample all in F# and Xamarin Forms.
 
 Here is the full Xamarin Forms code in F#.
 ```fsharp
