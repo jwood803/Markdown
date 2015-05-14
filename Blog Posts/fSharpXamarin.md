@@ -25,59 +25,49 @@ Unfortunately, one of the things Xamarin Studio isn't able to do yet (again, it'
 
 >At this time, there seems to be an issue of opening this in Xamarin Studio (currently already being fixed), so I'll continue using Visual Studio throughout the rest of this post.
 
-For the most part I followed Larry O'Brien's example from above. However, I did separate out the Xamarin Forms stuff from the `AppDelegate` file into the PCL project.
+For the most part I followed Larry O'Brien's example from above. However, I did separate out the Xamarin Forms stuff from the `AppDelegate` file into the PCL project. With the very generous help from Dave Thomas, we were able to get a running sample all in F# and Xamarin Forms.
 
 Here is the full Xamarin Forms code in F#.
 ```fsharp
+[<Extension>]
+type IListExtensions () =
+    [<Extension>]
+    static member inline AddRange(xs:'a IList, range) = range |> Seq.iter xs.Add
+
 type IOpenUrlService =
     abstract member OpenUrl: string -> bool 
 
 type MainPage() =
-    static member GetMainPage =
-       let contentPage = new ContentPage()
-       let panel = new StackLayout()
-       let phoneNumberText = new Entry()
-       let translateButton = new Button()
-       let callButton = new Button()
-       let transator = PhoneTranslator()
+    static member GetMainPage() =
+       let contentPage = ContentPage(Padding = Thickness(20., Device.OnPlatform(40., 20., 20.), 20., 20.))
+       let panel = StackLayout(VerticalOptions = LayoutOptions.FillAndExpand, 
+                               HorizontalOptions = LayoutOptions.FillAndExpand, 
+                               Orientation = StackOrientation.Vertical, 
+                               Spacing = 15.)
+       let phoneNumberText = Entry(Text = "1-855-XAMARIN")
+       let translateButton = Button(Text = "Translate")
+       let callButton = Button(Text = "Call", IsEnabled = false)
 
-       contentPage.Padding <- new Thickness(20., Device.OnPlatform(40., 20., 20.), 20., 20.)
-
-       panel.VerticalOptions <- LayoutOptions.FillAndExpand
-       panel.HorizontalOptions <- LayoutOptions.FillAndExpand
-       panel.Orientation <- StackOrientation.Vertical
-       panel.Spacing <- 15.
-
-       phoneNumberText.Text <- "1-855-XAMARIN"
-       translateButton.Text <- "Translate"
-       callButton.Text <- "Call"
-       callButton.IsEnabled <- false
-
-       translateButton.Clicked.Add(fun _ -> 
-            callButton.Text <- transator.toNumber phoneNumberText.Text
-            callButton.IsEnabled <- true
-        )
+       translateButton.Clicked.Add(fun _ -> callButton.Text <- PhoneTranslator.toNumber phoneNumberText.Text
+                                            callButton.IsEnabled <- true)
 
        callButton.Clicked.Add(fun _ ->
-           let isCalling = contentPage.DisplayAlert("Dial a number", "Would you like to call " + phoneNumberText.Text, "Yes", "No")
+           let isCalling = contentPage.DisplayAlert("Dial a number", "Would you like to call " + phoneNumberText.Text, "Yes", "No").Result
 
-           match isCalling.Result with
-            | true -> let dialer = DependencyService.Get<IOpenUrlService>()
-                      dialer.OpenUrl phoneNumberText.Text |> ignore
-            | false -> ()
-       )
+           if isCalling then
+             let dialer = DependencyService.Get<IOpenUrlService>()
+             dialer.OpenUrl phoneNumberText.Text |> ignore)
 
-       panel.Children.Add(new Label(Text = "Enter a Phoneword:"))
-       panel.Children.Add(phoneNumberText)
-       panel.Children.Add(translateButton)
-       panel.Children.Add(callButton)
+       panel.Children.AddRange([Label(Text = "Enter a Phoneword:")
+                                phoneNumberText
+                                translateButton
+                                callButton])
 
        contentPage.Content <- panel
-
        contentPage
 
 type App() =
-    inherit Application(MainPage = MainPage.GetMainPage)
+    inherit Application(MainPage = MainPage.GetMainPage())
 ```
 
 The `type IOpenUrlService` there is to create our interface so we can use shared code in our Xamarin Forms page and implement it separately in each platform specific project. You may notice we call this lower down and use Xamarin Forms dependency service locator.
@@ -110,16 +100,14 @@ And in our `AppDelegate` for iOS we can do the same as if we were in a C# projec
 type AppDelegate() = 
     inherit FormsApplicationDelegate()
 
-    member val Window = null with get, set
+    override val Window = null with get, set
 
     // This method is invoked when the application is ready to run.
     override this.FinishedLaunching(app, options) = 
         this.Window <- new UIWindow(UIScreen.MainScreen.Bounds)
-
         Xamarin.Forms.Forms.Init()
-
         this.LoadApplication(App())
-        true
+        base.FinishedLaunching(app, options)
 ```
 
 With our iOS implementation of `OpenUrlService`.
@@ -174,7 +162,7 @@ type OpenUrlService() =
 ```
 
 ---
-This gives a brief introduction to using F# with Xamarin to make mobile applications. This will only get easier in the future so look out for updates to Xamarin Studio for all the good stuff.
+This gives a brief introduction to using F# with Xamarin to make full mobile applications and without the need for using any C#. This will only get easier in the future so look out for updates to Xamarin Studio for all the good stuff.
 
 The full code can be found on [GitHub](https://github.com/Wintellect/XamarinSamples/tree/master/PhoneWordFSharp)
 
