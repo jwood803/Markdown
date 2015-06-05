@@ -1,0 +1,1 @@
+One thing that Xamarin Forms allows that helps reduce the repeated styling items you may have in your page is to use [styles](http://developer.xamarin.com/guides/cross-platform/xamarin-forms/working-with/styles/). 
