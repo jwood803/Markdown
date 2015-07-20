@@ -7,7 +7,7 @@ CodeStock had a wide array of sessions, from functional programming to AngularJS
 
 Of course, the go-to sessions were on Angular 2.0; it's definitely good to get in early with this big of a framework and CodeStock had the sessions to help you do just that.
 
-Personally, I did go to a couple of the functional programming sessions. [Bryan Hunter]() definitely had an informative session on [Lean]() and functional programming. Also, [Aaron Erickson]() had a very nice F# session that was, really to my surprise, to a standing room. The best part of it was the discussion going on afterwards between Object Oriented Programming and Functional Programming.
+Personally, I did go to a couple of the functional programming sessions. [Bryan Hunter](https://twitter.com/bryan_hunter) definitely had an informative session on [Lean](https://en.wikipedia.org/wiki/Lean_software_development) and functional programming. Also, [Aaron Erickson](https://twitter.com/aaronerickson) had a very nice F# session that was, really to my surprise, to a standing room. The best part of it was the discussion going on afterwards between Object Oriented Programming and Functional Programming.
 
 ### Networking
 Of course, being at a conference, it's hard to not talk to other people around you. You already have something in common - you're both developers! I find it interesting to find out where the folks I talk to are from and what they tend to specialize in. Just from talking to other developers you tend to gain an extra perspective and learn something new in the process.
