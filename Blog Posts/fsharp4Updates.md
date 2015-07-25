@@ -14,4 +14,20 @@ I'm sure I'm like most of the folks who mess with F# that they do a lot of their
 
 #### Normalized Modules
 
-As Lincoln mentioned in the video all functions are now normalized across `List`, `Seq`, and `Array` collections. This means that you can access the same functions among each of these collections where as in F# 3.1 that wasn't always the case.
+As Lincoln mentioned in the above video, all functions are now normalized across `List`, `Seq`, and `Array` collections. This means that you can access the same functions among each of these collections where as in F# 3.1 that wasn't always the case.
+
+#### Slicing Syntax in Lists
+
+In F# 4.0 we can now use the syntax similar to the below for slicing in Lists instead of converting to an `Array` to slice then convert back to a `List`.
+
+```fsharp
+let l = [1..5] // val l : int list = [1; 2; 3; 4; 5]
+
+l.[0..] // val it : int list = [2; 3; 4; 5]
+l.[..4] // val it : int list = [1; 2; 3; 4; 5]
+```
+
+Those are just some of the more interesting changes made to the language. The folks over at the .NET Blog also [made a nice summary of all the big changes](http://blogs.msdn.com/b/dotnet/archive/2015/04/29/rounding-out-visual-f-4-0-in-vs-2015-rc.aspx).
+
+---
+Wonder what F# and Wintellect can do for you or just have more questions about F# in general? Feel free to [reach out to us]()!
