@@ -27,7 +27,8 @@ l.[0..] // val it : int list = [2; 3; 4; 5]
 l.[..4] // val it : int list = [1; 2; 3; 4; 5]
 ```
 
-Those are just some of the more interesting changes made to the language. The folks over at the .NET Blog also [made a nice summary of all the big changes](http://blogs.msdn.com/b/dotnet/archive/2015/04/29/rounding-out-visual-f-4-0-in-vs-2015-rc.aspx).
+Those are just some of the more interesting, and probably some of the most beneficial, changes made to the language. The folks over at the .NET Blog also [made a nice summary of all the big changes](http://blogs.msdn.com/b/dotnet/archive/2015/04/29/rounding-out-visual-f-4-0-in-vs-2015-rc.aspx).
 
 ---
-Wonder what F# and Wintellect can do for you or just have more questions about F# in general? Feel free to [reach out to us]()!
+
+Wonder what F# and Wintellect can do for you or your business, or just have more questions about F# in general? Feel free to [reach out to us](http://www.wintellect.com/contact)!
